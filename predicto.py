@@ -1,6 +1,13 @@
 from fbprophet import Prophet
 import pandas as pd
 
+
+class Predicto:
+    """ definition of the Predicto class
+    """
+    def __init__(self, datetimeCol):
+        self._datetimeCol = datetimeCol
+    
 def make_dataframe(data, columns=['datetime', 'items']):
     """returns pandas dataframe
     """
