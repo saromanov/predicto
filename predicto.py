@@ -25,9 +25,11 @@ class Predicto:
     def aggregate_by_date(self, timeframe='hour'):
         """ its a helpful method for making aggregation by the date
         """
-        query = cursor.execute("SELECT date_trunc('{0}', {1}), COUNT(1) FROM {2} GROUP BY 1".format(timeframe, self.__datetimeCol, self._database))
-        result = self._cursor.execute()
-    
+        query = "SELECT date_trunc('{0}', {1}), COUNT(1) FROM {2} GROUP BY 1".format(timeframe, self._datetimeCol, self._database)
+        self._cursor.execute(query)
+        for res in self._cursor:
+            yield res
+
     def fit(self, X, labels):
         """ fitting of data
 

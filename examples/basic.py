@@ -10,6 +10,12 @@ def make_users(count=100):
     for i in range(count):
         user = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
         cursor.execute('INSERT INTO predicto(name, created) VALUES (%s, %s)', (user, datetime.now() - timedelta(hours=random.randint(1,30))))
+        connect.commit()
     connect.close()
 
-make_users()
+def aggregate():
+    connect = psycopg2.connect(database='predicto', host='localhost', port=5432, user='predicto', password='predicto')
+    cursor = connect.cursor()
+    cursor.execute("SELECT date_trunc('minute', created), COUNT(1) FROM predicto GROUP BY 1")
+    for row in cursor:
+        yield row
