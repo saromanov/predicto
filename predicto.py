@@ -6,9 +6,10 @@ import psycopg2
 class Predicto:
     """ definition of the Predicto class
     """
-    def __init__(self, datetimeCol, database=None, user=None, host=None, password=None):
+    def __init__(self, datetimeCol, database=None, user=None, host=None, port=None, password=None):
+        self._database = database
         self._datetimeCol = datetimeCol
-        self._connect = psycopg2.connect(database=database, user=user, password=password)
+        self._connect = psycopg2.connect(database=database, host=host, port=port, user=user, password=password)
         self._cursor = self._connect.cursor() 
     
     def __repr__(self):
@@ -20,6 +21,12 @@ class Predicto:
         :param: expr: string with query like SELECT * FROM base;
         """
         self._cursor.execute(expr)
+    
+    def aggregate_by_date(self, timeframe='hour'):
+        """ its a helpful method for making aggregation by the date
+        """
+        query = cursor.execute("SELECT date_trunc('{0}', {1}), COUNT(1) FROM {2} GROUP BY 1".format(timeframe, self.__datetimeCol, self._database))
+        result = self._cursor.execute()
     
     def fit(self, X, labels):
         """ fitting of data
