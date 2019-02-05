@@ -1,12 +1,15 @@
 from fbprophet import Prophet
 import pandas as pd
-
+import sqlalchemy
+import psycopg2
 
 class Predicto:
     """ definition of the Predicto class
     """
-    def __init__(self, datetimeCol):
+    def __init__(self, datetimeCol, database=None, user=None, host=None, password=None):
         self._datetimeCol = datetimeCol
+        connect = psycopg2.connect(database=database, user=user, host=host, password=password)
+        self._cursor = connect.cursor() 
     
     def __repr__(self):
         return type(self).__name__
