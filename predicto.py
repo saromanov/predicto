@@ -30,7 +30,7 @@ class Predicto:
         for res in self._cursor:
             yield res
 
-    def fit(self, X, labels):
+    def fit(self, X, labels=[]):
         """ fitting of data
 
         :param X: data for base for making predictions
@@ -38,15 +38,15 @@ class Predicto:
         """
         labels = [self._datetimeCol]
         labels.extend(labels)
-        df = self._make_dataframe(X, colums=labels)
+        df = self._make_dataframe(X, columns=labels)
         return self._predict(df)
     
-    def _make_dataframe(data, columns=['datetime', 'items']):
+    def _make_dataframe(self, data, columns=['datetime', 'items']):
         """returns pandas dataframe
         """
         return pd.DataFrame(data, columns=columns)
     
-    def _predict(data):
+    def _predict(self, data):
         """ predicting of the future data points
         based on exist data
         """
