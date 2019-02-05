@@ -8,8 +8,8 @@ class Predicto:
     """
     def __init__(self, datetimeCol, database=None, user=None, host=None, password=None):
         self._datetimeCol = datetimeCol
-        connect = psycopg2.connect(database=database, user=user, host=host, password=password)
-        self._cursor = connect.cursor() 
+        self._connect = psycopg2.connect(database=database, user=user, password=password)
+        self._cursor = self._connect.cursor() 
     
     def __repr__(self):
         return type(self).__name__
@@ -45,3 +45,8 @@ class Predicto:
         p.fit(data)
         future = p.make_future_dataframe(periods=366)
         return p.predict(future)
+    
+    def close(self):
+        """ close provides closing connection to db
+        """
+        self._connect.close()
