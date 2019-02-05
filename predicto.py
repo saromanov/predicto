@@ -1,4 +1,10 @@
 from fbprophet import Prophet
+import pandas as pd
+
+def make_dataframe(data, columns=['datetime', 'items']):
+    """returns pandas dataframe
+    """
+    return pd.DataFrame(data, columns=columns)
 
 def predict(data):
     """ predicting of the future data points
