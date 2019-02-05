@@ -8,8 +8,14 @@ class Predicto:
     def __init__(self, datetimeCol):
         self._datetimeCol = datetimeCol
     
+    def __repr__(self):
+        return type(self).__name__
+    
     def fit(self, X, labels):
         """ fitting of data
+
+        :param X: data for base for making predictions
+        :labels: list of the labels for making dataframe
         """
         labels = [self._datetimeCol]
         labels.extend(labels)
