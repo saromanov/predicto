@@ -1,0 +1,1 @@
+ self._cursor.execute("CREATE TABLE predicto(id SERIAL PRIMARY KEY, name TEXT NOT NULL, created TIMESTAMP);")
