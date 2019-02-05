@@ -8,10 +8,18 @@ class Predicto:
     def __init__(self, datetimeCol):
         self._datetimeCol = datetimeCol
     
-def make_dataframe(data, columns=['datetime', 'items']):
-    """returns pandas dataframe
-    """
-    return pd.DataFrame(data, columns=columns)
+    def fit(self, X, labels):
+        """ fitting of data
+        """
+        labels = [self._datetimeCol]
+        labels.extend(labels)
+        df = self._make_dataframe(X, colums=labels)
+    
+    def _make_dataframe(data, columns=['datetime', 'items']):
+        """returns pandas dataframe
+        """
+        return pd.DataFrame(data, columns=columns)
+
 
 def predict(data):
     """ predicting of the future data points
