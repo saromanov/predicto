@@ -14,6 +14,13 @@ class Predicto:
     def __repr__(self):
         return type(self).__name__
     
+    def query(self, expr):
+        """ apply query to postgesql
+        
+        :param: expr: string with query like SELECT * FROM base;
+        """
+        self._cursor.execute(expr)
+    
     def fit(self, X, labels):
         """ fitting of data
 
