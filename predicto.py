@@ -21,14 +21,19 @@ class Predicto:
         
         :param: expr: string with query should aggregate timestamp with items
         """
-        self._cursor.execute(expr)
+        return self._aggregate(expr)
     
     def aggregate_by_date(self, timeframe='day'):
         """ its a helpful method for making aggregation by the date
         """
         query = "SELECT date_trunc('{0}', {1}), COUNT(1) FROM {2} GROUP BY 1".format(timeframe, self._datetimeCol, self._database)
-        self._cursor.execute(query)
-        for res in self._cursor:
+        return self._aggregate(query)
+    
+    def _aggregate(self, expr):
+        """ general method for aggregation from postgresql
+        """
+         self._cursor.execute(query)
+         for res in self._cursor:
             yield res
 
     def fit(self, X):
