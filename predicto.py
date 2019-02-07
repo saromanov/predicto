@@ -15,8 +15,9 @@ class Predicto:
     def __repr__(self):
         return type(self).__name__
     
-    def query(self, expr):
-        """ apply query to postgesql
+    def aggregate(self, expr):
+        """ apply aggregation to postgesql. It should return two columns
+        datetime and number of items
         
         :param: expr: string with query should aggregate timestamp with items
         """
