@@ -1,0 +1,7 @@
+[cli]
+bears = PEP8Bear,PyUnusedCodeBear
+files = examples,LICENSE,predicto.py,README.md,requirements.txt
+default_actions = *: ApplyPatchAction
+[python]
+bears = PEP8Bear
+files = **/*.py
