@@ -1,7 +1,8 @@
-import psycopg2
-from datetime import datetime, timedelta
 import random 
 import string
+import argparse
+import psycopg2
+from datetime import datetime, timedelta
 
 def make_users(count=100):
     connect = psycopg2.connect(database='predicto', host='localhost', port=5432, user='predicto', password='predicto')
@@ -19,3 +20,9 @@ def aggregate():
     cursor.execute("SELECT date_trunc('minute', created), COUNT(1) FROM predicto GROUP BY 1")
     for row in cursor:
         yield row
+
+parser = argparse.ArgumentParser(description='Example of using Predicto')
+parser.add_argument('users', metavar='N', type=int, nargs='+',
+                   help='make users')
+
+args = parser.parse_args()

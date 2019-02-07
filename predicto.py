@@ -34,7 +34,6 @@ class Predicto:
         """ fitting of data
 
         :param X: data for base for making predictions
-        :labels: list of the labels for making dataframe
         """
         df = self._make_dataframe(X)
         return self._predict(df)
