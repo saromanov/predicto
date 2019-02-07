@@ -22,7 +22,7 @@ class Predicto:
         """
         self._cursor.execute(expr)
     
-    def aggregate_by_date(self, timeframe='hour'):
+    def aggregate_by_date(self, timeframe='day'):
         """ its a helpful method for making aggregation by the date
         """
         query = "SELECT date_trunc('{0}', {1}), COUNT(1) FROM {2} GROUP BY 1".format(timeframe, self._datetimeCol, self._database)
